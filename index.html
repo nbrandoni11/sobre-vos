@@ -38,15 +38,23 @@
     </style>
     <script>
         async function fetchPhrase() {
-            const response = await fetch('https://script.google.com/a/macros/infinite-reach.com/s/AKfycbz1Yl0X7qrKcgT7667WHXcKeA3CljIhL7A19lpI71QtO2yJiwB2fDUwS4H-fHWdSU8pNA/exec');
-            const phrase = await response.text();
-            document.getElementById('phrase').innerText = phrase;
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwUYEfZhnoy4zkyhrBhHiHRCwGk77ie40AqF5JnxMPazSf2RGgsVJ0Q6CzvO-GxpsoM9w/exec');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const phrase = await response.text();
+                document.getElementById('phrase').innerText = phrase;
+            } catch (error) {
+                console.error('Error fetching the phrase:', error);
+                document.getElementById('phrase').innerText = 'Error fetching the phrase.';
+            }
         }
     </script>
 </head>
 <body>
-    <h1>Un pensamiento por dia, de cosas que pienso a diario sobre vos</h1>
-    <p id="phrase">Ver algo que pienso. Solo se puede ver una por dia. Cambia cada dia</p>
+    <h1>Un pensamiento por día, de cosas que pienso a diario sobre vos</h1>
+    <p id="phrase">Ver algo que pienso. Solo se puede ver una por día. Cambia cada día</p>
     <button onclick="fetchPhrase()">El de hoy</button>
 </body>
 </html>
