@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Frase del Día</title>
+    <title>Algo de vos</title>
     <style>
         body {
             background-color: black;
@@ -38,21 +38,15 @@
     </style>
     <script>
         async function fetchPhrase() {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbwVQjgufUx6Xao-cjSxW5ayjshI3lsdUjttZWU6WEzWbERivTBogxxTTllA0GfooVJmjg/exec');
+            const response = await fetch('https://script.google.com/a/macros/infinite-reach.com/s/AKfycbz1Yl0X7qrKcgT7667WHXcKeA3CljIhL7A19lpI71QtO2yJiwB2fDUwS4H-fHWdSU8pNA/exec');
             const phrase = await response.text();
             document.getElementById('phrase').innerText = phrase;
-            localStorage.setItem('phraseOfTheDay', phrase);
-            localStorage.setItem('date', new Date().toDateString());
-        }
-
-        function showPhrase() {
-            fetchPhrase();
         }
     </script>
 </head>
 <body>
     <h1>Un pensamiento por dia, de cosas que pienso a diario sobre vos</h1>
-    <p id="phrase">Ver algo que pienso. Solo se puede ver uno por dia</p>
-    <button onclick="showPhrase()">El de hoy</button>
+    <p id="phrase">Ver algo que pienso. Solo se puede ver una por dia. Cambia cada dia</p>
+    <button onclick="fetchPhrase()">El de hoy</button>
 </body>
 </html>
