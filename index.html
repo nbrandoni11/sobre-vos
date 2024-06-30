@@ -12,6 +12,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            text-align: center;
             margin: 0;
         }
         h1 {
@@ -21,7 +22,6 @@
         p {
             font-size: 1.5em;
             margin: 20px;
-            text-align: center;
         }
         button {
             background-color: #444;
@@ -46,20 +46,13 @@
         }
 
         function showPhrase() {
-            const storedDate = localStorage.getItem('date');
-            const todayDate = new Date().toDateString();
-
-            if (storedDate === todayDate) {
-                document.getElementById('phrase').innerText = localStorage.getItem('phraseOfTheDay');
-            } else {
-                fetchPhrase();
-            }
+            fetchPhrase();
         }
     </script>
 </head>
 <body onload="showPhrase()">
     <h1>Un pensamiento por dia, de cosas que pienso a diario sobre vos</h1>
-    <p id="phrase">Ver algo que pienso.</p>
+    <p id="phrase">Ver algo que pienso.Solo se puede ver uno por dia</p>
     <button onclick="showPhrase()">El de hoy</button>
 </body>
 </html>
