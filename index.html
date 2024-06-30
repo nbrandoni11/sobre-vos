@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frase del Día</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px;
+            text-align: center;
+        }
+        button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #666;
+        }
+    </style>
+    <script>
+        async function fetchPhrase() {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbwVQjgufUx6Xao-cjSxW5ayjshI3lsdUjttZWU6WEzWbERivTBogxxTTllA0GfooVJmjg/exec');
+            const phrase = await response.text();
+            document.getElementById('phrase').innerText = phrase;
+            localStorage.setItem('phraseOfTheDay', phrase);
+            localStorage.setItem('date', new Date().toDateString());
+        }
+
+        function showPhrase() {
+            const storedDate = localStorage.getItem('date');
+            const todayDate = new Date().toDateString();
+
+            if (storedDate === todayDate) {
+                document.getElementById('phrase').innerText = localStorage.getItem('phraseOfTheDay');
+            } else {
+                fetchPhrase();
+            }
+        }
+    </script>
+</head>
+<body onload="showPhrase()">
+    <h1>Un pensamiento por dia, de cosas que pienso a diario sobre vos</h1>
+    <p id="phrase">Ver algo que pienso.</p>
+    <button onclick="showPhrase()">El de hoy</button>
+</body>
+</html>
