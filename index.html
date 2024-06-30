@@ -14,7 +14,6 @@
             height: 100vh;
             text-align: center;
             margin: 0;
-            user-select: none; /* Previene la selección de texto */
         }
         h1 {
             font-size: 2em;
@@ -36,25 +35,10 @@
         button:hover {
             background-color: #666;
         }
-        #resetButton {
-            opacity: 0; /* Hace el botón invisible */
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100vw;
-            cursor: pointer; /* Cambia el cursor al pasar sobre el botón invisible */
-        }
-        body.visible #resetButton {
-            opacity: 1; /* Hace el botón visible cuando el cuerpo tiene la clase 'visible' */
-            position: relative;
-            height: auto;
-            width: auto;
-        }
     </style>
     <script>
-        async function fetchPhrase(reset = false) {
-            const url = reset ? 'https://script.google.com/macros/s/AKfycbzm_HSgbBesuLxWITiEvljQW70akpynOHZ5G5ZshDskjY_Xr6kBLUBU2HXZ1y3mCzHZGQ/exec?reset=true' : 'https://script.google.com/macros/s/AKfycbzm_HSgbBesuLxWITiEvljQW70akpynOHZ5G5ZshDskjY_Xr6kBLUBU2HXZ1y3mCzHZGQ/exec';
+        async function fetchPhrase() {
+            const url = 'https://script.google.com/macros/s/AKfycby30No7Op-iqL9HcbmcTebIPpo0HZQxr9D0zEXIMlahpKaBLRStFqQRoi0n3DPxfCz_XA/exec';
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -68,9 +52,8 @@
             }
         }
 
-        // Función para mostrar el botón de restablecer al hacer clic en cualquier lugar
-        document.addEventListener('click', function() {
-            document.body.classList.toggle('visible');
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchPhrase(); // Carga la frase del día cuando la página se carga
         });
     </script>
 </head>
@@ -78,6 +61,5 @@
     <h1>Un pensamiento por día, de cosas que pienso a diario sobre vos</h1>
     <p id="phrase">Ver algo que pienso. Solo se puede ver una por día. Cambia cada día</p>
     <button onclick="fetchPhrase()">El de hoy</button>
-    <button id="resetButton" onclick="fetchPhrase(true)">Restablecer</button>
 </body>
 </html>
